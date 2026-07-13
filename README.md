@@ -6,7 +6,7 @@ Fake referral-partner website for testing the ReuseConnect iframe embed flow.
 
 1. Users sign in against a small seed DB (`data/users.json`).
 2. Server route `POST /api/embed-session` calls ReuseConnect `POST /api/embed/session` with the embed API key.
-3. `/portal` loads the returned URL in an iframe.
+3. `/portal` auto-creates a session on load and shows ReuseConnect in an iframe (Reload refreshes the session).
 
 ## Local setup
 

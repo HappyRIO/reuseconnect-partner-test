@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 type Mode = "new" | "returning";
 
@@ -12,9 +12,9 @@ export function PortalEmbed({ userLabel }: PortalEmbedProps) {
   const [mode, setMode] = useState<Mode>("new");
   const [embedUrl, setEmbedUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  const openPortal = async () => {
+  const openPortal = useCallback(async (sessionMode: Mode) => {
     setError(null);
     setLoading(true);
     setEmbedUrl(null);
@@ -23,7 +23,7 @@ export function PortalEmbed({ userLabel }: PortalEmbedProps) {
       const response = await fetch("/api/embed-session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ mode }),
+        body: JSON.stringify({ mode: sessionMode }),
       });
       const result = (await response.json()) as {
         success: boolean;
@@ -42,7 +42,13 @@ export function PortalEmbed({ userLabel }: PortalEmbedProps) {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    void openPortal(mode);
+    // Auto-load once on mount; use Reload after changing mode.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [openPortal]);
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
@@ -65,11 +71,11 @@ export function PortalEmbed({ userLabel }: PortalEmbedProps) {
         </select>
         <button
           type="button"
-          onClick={openPortal}
+          onClick={() => void openPortal(mode)}
           disabled={loading}
           className="rounded bg-slate-900 px-3 py-1.5 text-xs font-medium text-white hover:bg-slate-800 disabled:opacity-60"
         >
-          {loading ? "Opening…" : embedUrl ? "Reload portal" : "Open portal"}
+          {loading ? "Opening…" : "Reload portal"}
         </button>
       </div>
 
@@ -88,7 +94,7 @@ export function PortalEmbed({ userLabel }: PortalEmbedProps) {
         />
       ) : (
         <div className="flex min-h-0 flex-1 items-center justify-center bg-slate-50 text-sm text-slate-500">
-          Click “Open portal” to load ReuseConnect in this full-bleed area.
+          {loading ? "Opening ReuseConnect…" : "Portal could not be loaded."}
         </div>
       )}
     </div>
