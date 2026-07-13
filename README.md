@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ReuseConnect Partner Test
 
-## Getting Started
+Fake referral-partner website for testing the ReuseConnect iframe embed flow.
 
-First, run the development server:
+## What it does
+
+1. Users sign in against a small seed DB (`data/users.json`).
+2. Server route `POST /api/embed-session` calls ReuseConnect `POST /api/embed/session` with the embed API key.
+3. `/portal` loads the returned URL in an iframe.
+
+## Local setup
 
 ```bash
+cp .env.example .env.local
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Runs on [http://localhost:3001](http://localhost:3001) if you set a custom port, or the Next default `3000` — use another port if the backend already uses `3000`:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run dev -- -p 3001
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Env vars
 
-## Learn More
+| Variable | Example |
+|----------|---------|
+| `REUSECONNECT_API_BASE_URL` | `https://xxxx.ngrok-free.app` (or `http://localhost:3000` when calling local API from local Next) |
+| `REUSECONNECT_EMBED_API_KEY` | Partner embed API key from admin |
+| `REUSECONNECT_EMBED_ORIGIN` | Vercel embed URL, e.g. `https://your-embed.vercel.app` |
 
-To learn more about Next.js, take a look at the following resources:
+### Backend / admin checklist
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Enable **Iframe embed portal** on the referral partner.
+- Add this site’s origin to the partner **allowed origins** (local + Vercel).
+- Point backend `EMBED_FRONTEND_URL` at the embed Vercel URL.
+- Include the partner site origin in backend `CORS_ORIGIN` if needed.
+- Expose local backend with ngrok when the partner site is on Vercel.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Seed users
 
-## Deploy on Vercel
+All passwords: `password123`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `jane.doe@acme-test.com`
+- `john.smith@acme-test.com`
+- `returning@acme-test.com`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Pages
+
+- `/` — home
+- `/login` — partner login
+- `/users` — seed user list
+- `/portal` — embed iframe
+
+## Deploy (Vercel)
+
+1. Import this folder as a Vercel project.
+2. Set the three env vars above (API base = ngrok URL while backend is local).
+3. Deploy, then add the Vercel URL to the partner allowed origins.

@@ -1,0 +1,41 @@
+[
+  {
+    "id": "user-1",
+    "externalUserId": "acme-user-001",
+    "email": "jane.doe@acme-test.com",
+    "firstName": "Jane",
+    "lastName": "Doe",
+    "phone": "+441234567890",
+    "organisationName": "Acme Test Ltd",
+    "registrationNumber": "12345678",
+    "vatNumber": "GB123456789",
+    "address": "1 High Street, London, SW1A 1AA",
+    "password": "password123"
+  },
+  {
+    "id": "user-2",
+    "externalUserId": "acme-user-002",
+    "email": "john.smith@acme-test.com",
+    "firstName": "John",
+    "lastName": "Smith",
+    "phone": "+441198765432",
+    "organisationName": "Acme Test Ltd",
+    "registrationNumber": "12345678",
+    "vatNumber": "GB123456789",
+    "address": "2 High Street, London, SW1A 1AA",
+    "password": "password123"
+  },
+  {
+    "id": "user-3",
+    "externalUserId": "acme-user-003",
+    "email": "returning@acme-test.com",
+    "firstName": "Return",
+    "lastName": "User",
+    "phone": "",
+    "organisationName": "Acme Test Ltd",
+    "registrationNumber": "",
+    "vatNumber": "",
+    "address": "",
+    "password": "password123"
+  }
+]
