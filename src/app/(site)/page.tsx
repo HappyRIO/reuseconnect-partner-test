@@ -54,6 +54,15 @@ export default async function HomePage() {
           <li>Log in as a seed user, open Portal, load the iframe.</li>
         </ol>
       </section>
+
+      <section className="rounded-lg border border-slate-200 bg-white p-6">
+        <h2 className="text-sm font-semibold text-slate-900">Portal layout rule</h2>
+        <p className="mt-2 text-sm leading-6 text-slate-600">
+          Partner chrome stays outside the iframe (header + logout). ReuseConnect
+          keeps its own product sidebar inside the iframe. On <code className="rounded bg-slate-100 px-1">/portal</code>,
+          this site uses a full-bleed page with no partner sidebar so users only see one product nav.
+        </p>
+      </section>
     </div>
   );
 }

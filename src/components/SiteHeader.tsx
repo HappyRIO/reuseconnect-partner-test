@@ -6,8 +6,8 @@ export async function SiteHeader() {
   const user = await getCurrentUser();
 
   return (
-    <header className="border-b border-slate-200 bg-white">
-      <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3">
+    <header className="shrink-0 border-b border-slate-200 bg-white">
+      <div className="flex items-center justify-between gap-4 px-4 py-3">
         <div className="flex items-center gap-6">
           <Link href="/" className="text-sm font-semibold tracking-tight text-slate-900">
             Acme Partner Test
@@ -27,7 +27,7 @@ export async function SiteHeader() {
         <div className="flex items-center gap-3 text-sm">
           {user ? (
             <>
-              <span className="text-slate-600">
+              <span className="hidden text-slate-600 sm:inline">
                 {user.firstName} {user.lastName}
               </span>
               <LogoutButton />

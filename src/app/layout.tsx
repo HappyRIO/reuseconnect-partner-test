@@ -20,9 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${sourceSans.variable} h-full`}>
-      <body className="min-h-full bg-slate-100 font-sans text-slate-900 antialiased">
+      <body className="flex h-dvh flex-col overflow-hidden bg-slate-100 font-sans text-slate-900 antialiased">
         <SiteHeader />
-        <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8">{children}</main>
+        <div className="flex min-h-0 flex-1 flex-col overflow-hidden">{children}</div>
       </body>
     </html>
   );

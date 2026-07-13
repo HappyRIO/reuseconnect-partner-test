@@ -51,7 +51,13 @@ All passwords: `password123`
 - `/` — home
 - `/login` — partner login
 - `/users` — seed user list
-- `/portal` — embed iframe
+- `/portal` — full-bleed embed iframe (partner header only; no partner sidebar)
+
+### Portal layout (partner practice)
+
+- Partner owns site chrome: header + logout.
+- ReuseConnect owns product chrome: sidebar + page header inside the iframe.
+- `/portal` is full-bleed under the partner header so users do not see two sidebars.
 
 ## Deploy (Vercel)
 
