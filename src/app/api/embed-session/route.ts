@@ -6,7 +6,7 @@ import { findUserById } from "@/lib/db";
 type EmbedSessionResponse = {
   success: boolean;
   data?: {
-    embedPath: string;
+    embedUrl: string;
     token?: string;
     expiresAt?: string;
   };
@@ -40,7 +40,7 @@ export async function POST(request: Request) {
     };
     const mode = body.mode === "returning" ? "returning" : "new";
 
-    const { apiBaseUrl, embedApiKey, embedOrigin } = getServerConfig();
+    const { apiBaseUrl, embedApiKey } = getServerConfig();
 
     const payload =
       mode === "returning"
@@ -68,7 +68,7 @@ export async function POST(request: Request) {
 
     const result = (await upstream.json()) as EmbedSessionResponse;
 
-    if (!upstream.ok || !result.success || !result.data?.embedPath) {
+    if (!upstream.ok || !result.success || !result.data?.embedUrl) {
       return NextResponse.json(
         {
           success: false,
@@ -80,13 +80,10 @@ export async function POST(request: Request) {
       );
     }
 
-    const embedUrl = `${embedOrigin}${result.data.embedPath}`;
-
     return NextResponse.json({
       success: true,
       data: {
-        embedUrl,
-        embedPath: result.data.embedPath,
+        embedUrl: result.data.embedUrl,
         mode,
         user: {
           id: user.id,

@@ -31,11 +31,11 @@
     "email": "returning@acme-test.com",
     "firstName": "Return",
     "lastName": "User",
-    "phone": "",
+    "phone": "+441234567891",
     "organisationName": "Acme Test Ltd",
-    "registrationNumber": "",
-    "vatNumber": "",
-    "address": "",
+    "registrationNumber": "12345678",
+    "vatNumber": "GB123456789",
+    "address": "3 High Street, London, SW1A 1AA",
     "password": "password123"
   }
 ]

@@ -15,10 +15,6 @@ export function getServerConfig() {
       "REUSECONNECT_EMBED_API_KEY",
       process.env.REUSECONNECT_EMBED_API_KEY,
     ),
-    embedOrigin: required(
-      "REUSECONNECT_EMBED_ORIGIN",
-      process.env.REUSECONNECT_EMBED_ORIGIN,
-    ),
   };
 }
 

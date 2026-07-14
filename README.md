@@ -28,7 +28,6 @@ npm run dev -- -p 3001
 |----------|---------|
 | `REUSECONNECT_API_BASE_URL` | `https://xxxx.ngrok-free.app` (or `http://localhost:3000` when calling local API from local Next) |
 | `REUSECONNECT_EMBED_API_KEY` | Partner embed API key from admin |
-| `REUSECONNECT_EMBED_ORIGIN` | Vercel embed URL, e.g. `https://your-embed.vercel.app` |
 
 ### Backend / admin checklist
 
@@ -62,5 +61,5 @@ All passwords: `password123`
 ## Deploy (Vercel)
 
 1. Import this folder as a Vercel project.
-2. Set the three env vars above (API base = ngrok URL while backend is local).
+2. Set the two env vars above (API base = ngrok URL while backend is local).
 3. Deploy, then add the Vercel URL to the partner allowed origins.
